@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "texttransform"
+version = "0.1.0"
+description = ""
+authors = ["kotaro.watanabe <kotaro.watanabe@cinc-j.co.jp>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+loguru = "^0.5.3"
+emoji = "^0.6.0"
+neologdn = "^0.4"
+fasttext = {git = "https://github.com/facebookresearch/fastText.git"}
+mecab-python3 = "^1.0.3"
+SudachiPy = "^0.5.1"
+SudachiDict-full = "^20201223.post1"
+mrep = "^0.2.0"
+
+[tool.poetry.dev-dependencies]
+jupyter = "^1.0.0"
+jedi = "0.17.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
