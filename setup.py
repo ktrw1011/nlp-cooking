@@ -16,7 +16,10 @@ setup(
     name='nlp-cooking',
     version='0.1.0',
     python_requires='==3.*,>=3.7.0',
-    packages=['normalize', 'tokenizer', 'tokenizer.ja'],
+    packages=[
+        'nlp_cooking', 'nlp_cooking.normalize', 'nlp_cooking.tokenizer',
+        'nlp_cooking.tokenizer.ja'
+    ],
     package_dir={"": "."},
     package_data={},
     install_requires=['emoji==0.*,>=0.6.0', 'fasttext', 'loguru==0.*,>=0.5.3'],
