@@ -2,18 +2,20 @@
 name = "texttransform"
 version = "0.1.0"
 description = ""
-authors = ["kotaro.watanabe <kotaro.watanabe@cinc-j.co.jp>"]
+authors = [""]
 
 [tool.poetry.dependencies]
 python = "^3.7"
 loguru = "^0.5.3"
 emoji = "^0.6.0"
-neologdn = "^0.4"
-fasttext = {git = "https://github.com/facebookresearch/fastText.git"}
-mecab-python3 = "^1.0.3"
-SudachiPy = "^0.5.1"
-SudachiDict-full = "^20201223.post1"
-mrep = "^0.2.0"
+fasttext = {git = "https://github.com/facebookresearch/fastText.git", develop = false}
+neologdn = {version = "^0.4", optional = true}
+mecab-python3 = {version = "^1.0.3", optional = true}
+SudachiPy = {version = "^0.5.1", optional = true}
+SudachiDict-full = {version = "^20201223.post1", optional = true}
+
+[tool.poetry.extras]
+ja = ["neologdn", "mecab-python3", "SudachiPy", "SudachiDict-full"]
 
 [tool.poetry.dev-dependencies]
 jupyter = "^1.0.0"
