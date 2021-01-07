@@ -13,10 +13,9 @@ readme = ''
 
 setup(
     long_description=readme,
-    name='texttransform',
+    name='nlp-cooking',
     version='0.1.0',
     python_requires='==3.*,>=3.7.0',
-    author='',
     packages=['normalize', 'tokenizer', 'tokenizer.ja'],
     package_dir={"": "."},
     package_data={},
