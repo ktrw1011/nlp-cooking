@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "texttransform"
+name = "nlp-cooking"
 version = "0.1.0"
 description = ""
-authors = [""]
+authors = []
 
 [tool.poetry.dependencies]
 python = "^3.7"
