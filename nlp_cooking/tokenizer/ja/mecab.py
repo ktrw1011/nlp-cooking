@@ -29,7 +29,12 @@ class MeCabTokenizer(BaseTokenizer):
     def tokenize(self, text:str, pos:bool=False) -> Union[List[str], List[List[str]]]:
         res = []
         for word_attr in self.mecab.parse(text).strip().split('\n')[:-1]:
-            token, pos_attr = word_attr.split('\t')
+            # 正規化されていないと稀に一部の文字でエラーが発生する
+            try:
+                token, pos_attr = word_attr.split('\t')
+            except ValueError:
+                continue
+
             pos_attr = pos_attr.split(',')
             pos_attr, yomi = pos_attr[:-3], pos_attr[-2]
             pos_attr.append(yomi)
