@@ -5,14 +5,15 @@ import MeCab
 from ..base import BaseTokenizer
 
 class MeCabTokenizer(BaseTokenizer):
-    def __init__(self, dict_path: str="/usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd") -> None:
+    def __init__(self, mecabrc_path:str="/usr/local/etc/mecabrc", dict_path: str="/usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd") -> None:
         super().__init__()
 
+        self.mecabrc_path = mecabrc_path
         self.dict_path = dict_path
         self._init_tokenizer()
 
     def _init_tokenizer(self):
-        self.mecab = MeCab.Tagger(f'-d {self.dict_path}')
+        self.mecab = MeCab.Tagger(f'-r {self.mecabrc_path} -d {self.dict_path}')
         self.mecab.parse("")
 
     def __getstate__(self):
