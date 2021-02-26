@@ -1,15 +1,31 @@
-from typing import Union, List
+from typing import Union, List, Optional
 
 import MeCab
+import regex
+import jaconv
 
 from ..base import BaseTokenizer
 
+def _is_hiragana_katakana(word) -> bool:
+    if regex.search(r"^[\p{Hiragana}|\p{Katakana}|ー]+$", word):
+        return True
+    else:
+        return False
+
 class MeCabTokenizer(BaseTokenizer):
-    def __init__(self, mecabrc_path:str="/usr/local/etc/mecabrc", dict_path: str="/usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd") -> None:
+    def __init__(self, mecabrc_path:Optional[str]=None, dict_path:Optional[str]=None) -> None:
         super().__init__()
 
-        self.mecabrc_path = mecabrc_path
-        self.dict_path = dict_path
+        if mecabrc_path is not None:
+            self.mecabrc_path = mecabrc_path
+        else:
+            self.mecabrc_path = "/usr/local/etc/mecabrc"
+
+        if dict_path is not None:
+            self.dict_path = dict_path
+        else:
+            self.dict_path = "/usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd"
+
         self._init_tokenizer()
 
     def _init_tokenizer(self):
@@ -44,3 +60,14 @@ class MeCabTokenizer(BaseTokenizer):
             else:
                 res.append(token)
         return res
+    
+    def yomi(self, word:str) -> str:
+        yomi = []
+        attrs = self.tokenize(word, pos=True)
+        for token, attr in attrs:
+            if _is_hiragana_katakana(token):
+                # 形態素がひらがなorカタカナの場合にはそのまま
+                yomi.append(jaconv.hira2kata(token))
+            else:
+                yomi.append(attr[-1])
+        return ''.join(yomi)

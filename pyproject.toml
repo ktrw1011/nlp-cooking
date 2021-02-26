@@ -14,9 +14,11 @@ mecab-python3 = {version = "^1.0.3", optional = true}
 SudachiPy = {version = "^0.5.1", optional = true}
 SudachiDict-full = {version = "^20201223.post1", optional = true}
 joblib = "^1.0.0"
+regex = "^2020.11.13"
+jaconv = {version = "^0.2.4", optional = true}
 
 [tool.poetry.extras]
-ja = ["neologdn", "mecab-python3", "SudachiPy", "SudachiDict-full"]
+ja = ["neologdn", "mecab-python3", "SudachiPy", "SudachiDict-full", "jaconv"]
 
 [tool.poetry.dev-dependencies]
 jupyter = "^1.0.0"

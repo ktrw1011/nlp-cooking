@@ -71,10 +71,9 @@ class EmojiNormalizer(BaseTransform):
     def __init__(self) -> None:
         try:
             import emoji
+            self.pattern = emoji.UNICODE_EMOJI
         except:
             raise ImportError
-
-        self.pattern = emoji.UNICODE_EMOJI
     
     def transform(self, text:str) -> str:
         return ''.join(c for c in text if c not in self.pattern)
